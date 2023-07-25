@@ -11,7 +11,7 @@ using webapi.Data;
 namespace webapi.Migrations
 {
     [DbContext(typeof(TarefasDBContext))]
-    [Migration("20230724183506_InitialDB")]
+    [Migration("20230725140758_InitialDB")]
     partial class InitialDB
     {
         /// <inheritdoc />
