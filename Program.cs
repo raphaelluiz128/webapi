@@ -20,6 +20,7 @@ builder.Services.AddEntityFrameworkSqlServer()
     );
 
 builder.Services.AddScoped<IUsuarioRep, UsuarioRep>();
+builder.Services.AddScoped<ITarefaRep, TarefaRep>();
 
 var app = builder.Build();
 

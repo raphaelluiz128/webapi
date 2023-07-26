@@ -11,7 +11,9 @@ namespace webapi.Data.Map
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Description).IsRequired().HasMaxLength(100);
             builder.Property(x => x.Status).IsRequired();
+            builder.Property(x => x.UsuarioId);
 
+            builder.HasOne(x => x.Usuario);
         }
     }
 }
