@@ -2,6 +2,7 @@
 using webapi.Integration.Refit;
 using webapi.Integration.Response;
 using System;
+using System.Net;
 
 namespace webapi.Integration
 {
@@ -17,12 +18,17 @@ namespace webapi.Integration
         public async Task<ViaCepResponse> ObterDadosViaCep(string cep)
         {
             var responseData = await _viaCepIntegrationRefit.ObterDadosViaCep(cep);
+            Console.WriteLine("resp");
+            Console.WriteLine(responseData.StatusCode);
 
             if (responseData != null && responseData.IsSuccessStatusCode)
             {
                 return responseData.Content;
             }
 
+            if(responseData.StatusCode == HttpStatusCode.BadRequest) {
+                Console.WriteLine("é bad");
+            };
 
             return null;
         }
