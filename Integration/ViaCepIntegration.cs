@@ -3,6 +3,13 @@ using webapi.Integration.Refit;
 using webapi.Integration.Response;
 using System;
 using System.Net;
+using System.Drawing;
+using System.Runtime.ConstrainedExecution;
+using Azure;
+using Microsoft.AspNetCore.ResponseCompression;
+using Refit;
+using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace webapi.Integration
 {
@@ -15,22 +22,12 @@ namespace webapi.Integration
             _viaCepIntegrationRefit = viaCepIntegrationRefit;
         }
 
-        public async Task<ViaCepResponse> ObterDadosViaCep(string cep)
+        public async Task<ApiResponse<ViaCepResponse>> ObterDadosViaCep(string cep)
         {
-            var responseData = await _viaCepIntegrationRefit.ObterDadosViaCep(cep);
-            Console.WriteLine("resp");
-            Console.WriteLine(responseData.StatusCode);
-
-            if (responseData != null && responseData.IsSuccessStatusCode)
-            {
-                return responseData.Content;
-            }
-
-            if(responseData.StatusCode == HttpStatusCode.BadRequest) {
-                Console.WriteLine("é bad");
-            };
-
-            return null;
+            var responseData = await _viaCepIntegrationRefit.ObterDadosViaCep(cep); 
+            Console.WriteLine(responseData);
+            return responseData;
+            
         }
 
     }

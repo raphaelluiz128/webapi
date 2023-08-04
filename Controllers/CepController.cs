@@ -24,11 +24,21 @@ namespace webapi.Controllers
             {
                 var responseData = await _viaCepIntegration.ObterDadosViaCep(cep);
 
-                if (responseData == null)
+                
+                switch (responseData.StatusCode)
                 {
-                    return BadRequest("CEP não encontrado.");
+                    case System.Net.HttpStatusCode.OK:
+                        return Ok(responseData);
+                    case System.Net.HttpStatusCode.Unauthorized:
+                        return Unauthorized(responseData);
+                    case System.Net.HttpStatusCode.NotFound:
+                        return NotFound("Não encontrado.");
+                    default:
+                        return BadRequest(responseData);
                 }
-                return Ok(responseData);
+                
+
+               
 
             }
 
@@ -36,7 +46,7 @@ namespace webapi.Controllers
             
             {
                 Console.WriteLine(e);
-                return BadRequest("Erro."+e);
+                return StatusCode(StatusCodes.Status500InternalServerError, e);
             }
 
         }
