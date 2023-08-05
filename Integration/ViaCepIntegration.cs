@@ -16,7 +16,6 @@ namespace webapi.Integration
     public class ViaCepIntegration : IViaCepIntegration
     {
         private readonly IViaCepIntegrationRefit _viaCepIntegrationRefit;
-
         public ViaCepIntegration(IViaCepIntegrationRefit viaCepIntegrationRefit)
         {
             _viaCepIntegrationRefit = viaCepIntegrationRefit;
@@ -25,9 +24,7 @@ namespace webapi.Integration
         public async Task<ApiResponse<ViaCepResponse>> ObterDadosViaCep(string cep)
         {
             var responseData = await _viaCepIntegrationRefit.ObterDadosViaCep(cep); 
-            Console.WriteLine(responseData);
-            return responseData;
-            
+                return responseData;          
         }
 
     }

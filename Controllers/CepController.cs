@@ -24,21 +24,17 @@ namespace webapi.Controllers
             {
                 var responseData = await _viaCepIntegration.ObterDadosViaCep(cep);
 
-                
                 switch (responseData.StatusCode)
                 {
                     case System.Net.HttpStatusCode.OK:
-                        return Ok(responseData);
+                        return Ok(responseData.Content);
                     case System.Net.HttpStatusCode.Unauthorized:
-                        return Unauthorized(responseData);
+                        return Unauthorized();
                     case System.Net.HttpStatusCode.NotFound:
                         return NotFound("Não encontrado.");
                     default:
-                        return BadRequest(responseData);
+                        return BadRequest();
                 }
-                
-
-               
 
             }
 
